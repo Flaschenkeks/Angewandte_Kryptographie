@@ -17,9 +17,13 @@ def haeufigkeitsverteilung(string):
     for (x, y) in absolute_haeufigkeiten:
         relative_haeufigkeit.append((x, (y / buchstaben_anzahl) * 100))
     sorted_relative_haeufigkeit = sorted(relative_haeufigkeit, key=lambda z: z[1], reverse=True)
-    print(sorted_relative_haeufigkeit[:4])
-    # for x in range(4):
-    #     print(sorted_relative_haeufigkeit[x])
+    # print(sorted_relative_haeufigkeit[:4])
+    # for (x, y) in sorted_relative_haeufigkeit:
+    for x in range(6):
+        schluessel_zahl = ord(sorted_relative_haeufigkeit[x][0]) - ord('E')
+        schluessel_zahl %= 26
+        print(chr(schluessel_zahl + 65), sorted_relative_haeufigkeit[x][1], end=" | ")
+    print()
 
     # for (x, y) in sorted_relative_haeufigkeit:  # gibt die absteigend sortierte relative haeufigkeitaus
     #     print(x, y)
@@ -28,7 +32,8 @@ def haeufigkeitsverteilung(string):
     #     print(str(x) + "\t" + str(y) + "\t\t" + str("{:.2f}".format(b)) + '%')
 
 
-def vigenere(klartext, schluessel, verschluessel_bool):  # verschlüsselt klartext mit schluessel und gibt chiffrat zurück
+def vigenere(klartext, schluessel,
+             verschluessel_bool):  # verschlüsselt klartext mit schluessel und gibt chiffrat zurück
     klartext = klartext.upper()
     schluessel = schluessel.upper()
     ascii_klartext = []
@@ -204,23 +209,19 @@ def a2():
             temp_i = temp_i + 1
         return substringlist
 
+    print('a)')
+    for ((x, y), (w, z)) in zip(haeufigkeit2, relhaeufigkeit2):
+        print(f"{x}\t{y}\t{'{:.2f}'.format(z)}%")
+    print('b)')
     # koinzidenzindex_rechner(substrings(raw_chiffrat_2, 5))  # [:30:]          # NVKGIMBXFUDEGVKMJVMVUSDXYOZMKZASBG
     print(koinzidenzindex_rechner(substrings(raw_chiffrat_2, 10)))  # [:30:]     # NVKGIMBXFUDEGVKMJVMVUSDXYOZMKZASBG
-
-    print(raw_chiffrat_2)
-
-    # vigenere_schluessel_index = [ord('J') - ord('E'), ord('P') - ord('E'), ord('Y') - ord('E'), ord('O') - ord('E'),
-    #                              ord('G') - ord('E')]
-    # print(vigenere_schluessel_index)
-    # vigenere_schluessel = ''
-    # for zahl in vigenere_schluessel_index:
-    #     vigenere_schluessel += chr(zahl + 65)
-    # print(vigenere_schluessel)
-    # print(vigenere(raw_chiffrat_2, vigenere_schluessel, 0))
-
-    # print('a)')
-    # for ((x, y), (w, z)) in zip(haeufigkeit2, relhaeufigkeit2):
-    #     print(str(x) + "\t" + str(y) + "\t\t" + str("{:.2f}".format(z)) + '%')
+    print('c)')
+    schluessel = 'FWQGCZXUGP'  # Start: FKQWCNTUKY | Finished: FWQGCZXUGP
+    print(schluessel)
+    print('d)')
+    print(vigenere(raw_chiffrat_2, schluessel, 0))
+    print('e)')
+    print('"Dies ist Klaus" von Heinz Rudolf Kunze')
 
 
 a2()
